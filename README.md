@@ -1,6 +1,6 @@
-# Solar Challenge Week 0 - Benin Solar Data EDA
+# Solar Challenge Week 0 - Solar Data EDA
 
-This project performs exploratory data analysis (EDA) on solar and meteorological data collected from Benin (Malanville). The analysis aims to understand the relationships between solar irradiance, weather variables, and module performance, and to prepare the data for further modeling or reporting.
+This project performs exploratory data analysis (EDA) on solar and meteorological data collected from Benin, Sierraleone, and Togo. The analysis aims to understand the relationships between solar irradiance, weather variables, and module performance, and to prepare the data for further modeling or reporting.
 
 ## Project Structure
 
@@ -9,10 +9,18 @@ This project performs exploratory data analysis (EDA) on solar and meteorologica
 ├── data/
 │   ├── benin-malanville.csv
 │   └── benin-cleaned.csv
+│   ├── sierraleone-bumbuna.csv
+│   └── sierraleone-cleaned.csv
+│   ├── togo-dapaong_qc.csv
+│   └── togo-cleaned.csv
 ├── src/
 │   ├── notebooks/
 │   │   └── benin_eda.ipynb
+│   │   └── sierraleone_eda.ipynb
+│   │   └── togo_eda.ipynb
 │   └── benin_eda.py
+│   └── sierraleone_eda.py
+│   └── togo_eda.py
 └── README.md
 ```
 
