@@ -1,89 +1,113 @@
+
 # Solar Challenge Week 0 - Solar Data EDA
 
-This project performs exploratory data analysis (EDA) on solar and meteorological data collected from Benin, Sierraleone, and Togo. The analysis aims to understand the relationships between solar irradiance, weather variables, and module performance, and to prepare the data for further modeling or reporting.
+This project showcases exploratory data analysis (EDA) on solar and meteorological datasets from Benin, Sierra Leone, and Togo. The objective is to uncover relationships between solar irradiance, weather variables, and module performance, preparing the data for subsequent modeling or reporting. This analysis demonstrates the use of Python, particularly the pandas library, for robust data exploration.
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 .
-├── data/
+├── app/                  # Streamlit dashboard application
+│   └── main.py
+├── reports/              # Generated reports and summaries
+├── screenshots/          # Visualizations and dashboard snapshots
+├── src/                  # Source code for data processing and analysis
+│   ├── notebooks/        # Jupyter notebooks for EDA
+│   │   ├── benin_eda.ipynb
+│   │   ├── sierraleone_eda.ipynb
+│   │   └── togo_eda.ipynb
+│   ├── benin_eda.py      # Script for Benin data analysis
+│   ├── sierraleone_eda.py# Script for Sierra Leone data analysis
+│   └── togo_eda.py       # Script for Togo data analysis
+├── data/                 # Raw and cleaned datasets
 │   ├── benin-malanville.csv
-│   └── benin-cleaned.csv
+│   ├── benin-cleaned.csv
 │   ├── sierraleone-bumbuna.csv
-│   └── sierraleone-cleaned.csv
+│   ├── sierraleone-cleaned.csv
 │   ├── togo-dapaong_qc.csv
 │   └── togo-cleaned.csv
-├── src/
-│   ├── notebooks/
-│   │   └── benin_eda.ipynb
-│   │   └── sierraleone_eda.ipynb
-│   │   └── togo_eda.ipynb
-│   └── benin_eda.py
-│   └── sierraleone_eda.py
-│   └── togo_eda.py
-└── README.md
+├── .github/workflows/    # CI/CD workflows
+│   └── ci.yml
+├── .gitignore            # Git ignore file
+├── requirements.txt      # Python dependencies
+└── README.md             # Project documentation
 ```
 
-## Features
+## ✨ Features
 
-- Data cleaning and outlier removal
-- Correlation and relationship analysis (heatmaps, scatter plots)
-- Wind distribution analysis (wind rose, histograms)
-- Visualization of time series and variable distributions
-- Bubble charts for multi-variable relationships
+- **Data Cleaning & Outlier Removal:** Ensures data quality by handling missing values and filtering anomalies.
+- **Correlation Analysis:** Utilizes heatmaps to identify relationships between variables like GHI, DNI, DHI, TModA, and TModB.
+- **Scatter Plots:** Explores relationships such as WS, WSgust, WD vs. GHI, and RH vs. Tamb/GHI.
+- **Wind Distribution Analysis:** Visualizes wind speed and direction using wind rose plots and histograms.
+- **Time Series & Distribution Visualizations:** Analyzes temporal trends and variable distributions.
+- **Bubble Charts:** Depicts multi-variable relationships, e.g., GHI vs. Tamb with bubble size representing RH.
+- **Interactive Dashboard (Streamlit):** Streamlit app for dynamic data exploration and visualization.
+- **CI/CD Integration (GitHub Actions):** Automated workflows using GitHub Actions for testing and deployment. 
 
-## Requirements
+## 🛠️ Installation & Setup
+### Prerequisites
+	- Python 3.8+
+	- Git
 
-- Python 3.8+
-- pandas
-- numpy
-- matplotlib
-- seaborn
-- scipy
-- windrose
+### Local Setup
 
-Install dependencies with:
+1.	Clone the Repository:
+```bash
+git clone https://github.com/estif-lul/solar-challenge-week0.git
+cd solar-challenge-week0
 ```
-pip install pandas numpy matplotlib seaborn scipy windrose
+
+
+2.	Create a Virtual Environment:
+```bash
+python -m venv venv
+# Activate the virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+```
+3.	Install Dependencies:
+```bash
+pip install -r requirements.txt
 ```
 
-## Usage
+## 🚀 Usage
 
-1. **Data Preparation:**  
-   Place your raw data file (e.g `benin-malanville.csv`) in the `data/` directory.
+### Running the Streamlit Dashboard
 
-2. **Run the Notebook:**  
-   Open `src/notebooks/[country]_eda.ipynb` in Jupyter or VS Code and run the cells to perform EDA and generate plots.
+Navigate to the app/ directory and run:
+```bash
+cd app
+streamlit run main.py
+```
+This will launch the interactive dashboard in your default web browser. 
 
-3. **Run the Script:**  
-   Alternatively, run `src/[country]_eda.py` for a script-based analysis:
-   ```
-   python src/[country]_eda.py
-   ```
+### Running Jupyter Notebooks
 
-4. **Outputs:**  
-   - Cleaned data is saved as `[country]-cleaned.csv` in the `data/` directory.
-   - Plots are displayed inline in the notebook or as output from the script.
+Navigate to the src/notebooks/ directory and open the desired notebook (e.g., benin_eda.ipynb) using Jupyter Notebook or JupyterLab:
+```bash
+cd src/notebooks
+jupyter notebook
+```
 
-## Key Analyses
+### Running Python Scripts
 
-- **Correlation Heatmap:**  
-  Visualizes relationships between GHI, DNI, DHI, TModA, and TModB.
+Execute the analysis scripts directly from the command line:
+```bash
+python src/benin_eda.py
+python src/sierraleone_eda.py
+python src/togo_eda.py
+```
 
-- **Scatter Plots:**  
-  Explore relationships such as WS, WSgust, WD vs. GHI, and RH vs. Tamb/GHI.
+## 📊 Outputs
 
-- **Wind Rose:**  
-  Shows wind speed and direction distribution.
+- **Cleaned Data**: Saved as [country]-cleaned.csv in the data/ directory.
+- **Visualizations**: Generated plots and charts are saved in the screenshots/ directory.
+- **Reports**: Summarized findings and analyses are available in the reports/ directory.
 
-- **Histograms:**  
-  Distribution of GHI and wind speed.
 
-- **Bubble Chart:**  
-  GHI vs. Tamb with bubble size representing RH.
+## 🤝 Contributing
 
----
+Feel free to fork the repo and submit PRs. For major changes, please open an issue first.
 
-**Author:**  
-Estifanos Lulseged  
-Solar Challenge Week 0
