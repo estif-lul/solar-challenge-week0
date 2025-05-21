@@ -4,6 +4,7 @@ import matplotlib.pylab as plt
 import seaborn as sns
 from scipy.stats import zscore
 from windrose import WindroseAxes
+from data_cleaner import DataCleaner
 
 plt.style.use('ggplot')
 
@@ -25,28 +26,13 @@ columns_with_nulls = missing_percentage[missing_percentage > 5]
 print("Columns with more than 5% missing values:")
 print(columns_with_nulls)
 
-# Drop columns with na values
-df = df.dropna(subset=['GHI', 'DNI','DHI', 'ModA', 'ModB','WS', 'WSgust']).copy()
-df = df.reindex().copy()
+cleaner = DataCleaner(df)
 
-# remove incorrect entries for GHI, the possible values for Global Horizontal Irradiance (GHI) are between 0 and 1000 W/m²
-df = df[(df['GHI'] >= 0) & (df['GHI'] <= 1000)].copy()
-# remove incorrect entries for DNI, the possible values for Direct Normal Irradiance (DNI) are between 0 and 1000 W/m²
-df = df[(df['DNI'] >= 0) & (df['DNI'] <= 1000)].copy()
-# remove incorrect entries for DHI, the possible values for Diffuse Horizontal Irradiance (DHI) are between 0 and 1000 W/m²
-df = df[(df['DHI'] >= 0) & (df['DHI'] <= 1000)].copy()
+# Clean the data
+df = cleaner.clean().copy()
 
-# Compute Z-scores for GHI, DNI, and DHI, 'ModA', 'ModB', 'WS', and 'WSgust'
-z_scores = zscore(df[['GHI', 'DNI','DHI', 'ModA', 'ModB','WS', 'WSgust']])
-# Create a DataFrame for Z-scores to align indices
-z_scores_df = pd.DataFrame(z_scores, columns=['GHI', 'DNI', 'DHI', 'ModA', 'ModB', 'WS', 'WSgust'], index=df.index)
-
-# Identify outliers using Z-scores
-# A Z-score greater than 3 or less than -3 is typically considered an outlier
-# Filter the DataFrame to get the outliers
-outliers = df[np.abs(z_scores_df) > 3].any(axis=1)
-# Drop rows with outliers
-df_cleaned = df.loc[~outliers].reset_index(drop=True).copy()
+# Remove outliers
+df_cleaned = cleaner.remove_outliers().copy()
 print('Cleaned data shape: ',df_cleaned.shape)
 
 # Save the cleaned data to a new CSV file
